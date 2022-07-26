@@ -47,38 +47,26 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public void addProduct(MultipartFile file, String productName, Double cost) {
-        String fileName = StringUtils.cleanPath(System.currentTimeMillis()+"pp.png");
-        try {
-            Path fileStorage = Paths.get(fileUrl, fileName).toAbsolutePath().normalize();
-            Files.copy(file.getInputStream(), fileStorage, StandardCopyOption.REPLACE_EXISTING);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+    public void addProduct(Product product) {
+//        String fileName = StringUtils.cleanPath(System.currentTimeMillis()+"pp.png");
+//        try {
+//            Path fileStorage = Paths.get(fileUrl, fileName).toAbsolutePath().normalize();
+//            Files.copy(file.getInputStream(), fileStorage, StandardCopyOption.REPLACE_EXISTING);
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//
 
-
-        Product newProduct = new Product();
-        newProduct.setProductName(productName);
-        newProduct.setCost(cost);
-        newProduct.setImg(fileName);
-
-        productRepo.save(newProduct);
+        productRepo.save(product);
     }
 
     @Override
-    @SneakyThrows
     public void updateProduct(Product product) {
-        Product oldProduct = productRepo.getById(product.getId());
-        oldProduct.setProductName(product.getProductName());
-        oldProduct.setCost(product.getCost());
+        productRepo.save(product);
+    }
 
-        if(product.getImg()==null){
-            String filePath = fileUrl+"/"+oldProduct.getImg();
-            Path fileToDelete = Paths.get(filePath);
-            Files.delete(fileToDelete);
-            oldProduct.setImg(null);
-        }
-        productRepo.save(oldProduct);
+    @Override
+    public void deleteProduct(Long productId){
+        productRepo.deleteById(productId);
     }
 }

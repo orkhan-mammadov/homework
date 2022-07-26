@@ -14,6 +14,10 @@ import MenuItem from '@mui/material/MenuItem';
 
 const Navbar = () => {
 
+  const handleClick = () => {
+  window.location.replace("http://localhost:3000/addProduct")
+  }
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -50,6 +54,9 @@ const Navbar = () => {
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 login
+              </Button>
+              <Button sx={{ my: 2, color: 'white', display: 'block' }} onClick={()=>handleClick()}>
+                              Add Product
               </Button>
           </Box>
         </Toolbar>

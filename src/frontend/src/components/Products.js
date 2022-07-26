@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import ProductService from "../services/ProductService";
+import Button from '@mui/material/Button';
 
 class Products extends React.Component {
 
@@ -18,13 +19,19 @@ class Products extends React.Component {
     }
 
     async componentDidMount() {
+
        await ProductService.getProducts().then((response) => {
             this.setState({data: response.data.products})
-
        })
     }
 
+    handleClick(id){
+        ProductService.deleteProduct(id);
+        window.location.reload();
+    }
+
     render() {
+
         return (
             <TableContainer component={Paper}>
                 <h1 className="text-center">Products</h1>
@@ -32,10 +39,10 @@ class Products extends React.Component {
                     <TableHead>
                         <TableRow>
                             <TableCell align="right">Product ID</TableCell>
-                            <TableCell align="right">Product Title</TableCell>
-                            <TableCell align="right">Desc</TableCell>
+                            <TableCell align="right">Product Name</TableCell>
+                            <TableCell align="right">Description</TableCell>
                             <TableCell align="right">Price</TableCell>
-                            <TableCell align="right">Amount</TableCell>
+                            <TableCell align="right">Actions</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -45,7 +52,12 @@ class Products extends React.Component {
                          <TableCell align="right">{data.productName}</TableCell>
                          <TableCell align="right">{data.details}</TableCell>
                          <TableCell align="right">{data.cost}</TableCell>
-                         <TableCell align="right">10</TableCell>
+                         <TableCell align='right'>
+                         <Button variant="contained" color="success"><a href={"/product/"+data.id}>View</a></Button>
+                         </TableCell>
+                         <TableCell align='right'>
+                         <Button variant="contained" color="error" onClick={()=>this.handleClick(data.id)}>Delete</Button>
+                         </TableCell>
                          </TableRow>
                        )}
 

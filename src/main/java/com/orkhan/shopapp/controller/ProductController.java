@@ -19,7 +19,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("")
     public ProductListDTO getAll(){
         return productService.getAll();
     }
@@ -29,11 +29,9 @@ public class ProductController {
         return productService.getById(productId);
     }
 
-    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE})
-    public Object addProduct(@RequestParam(name = "file", required = false)MultipartFile file,
-                             @RequestParam("productName") String productName,
-                             @RequestParam("cost") Double cost){
-        productService.addProduct(file,productName,cost);
+    @PostMapping()
+    public Object addProduct(@RequestBody Product product){
+        productService.addProduct(product);
         return null;
     }
 
@@ -43,9 +41,14 @@ public class ProductController {
         return null;
     }
 
-    @PutMapping("/")
+    @PutMapping()
     public Object updateProduct(@RequestBody Product product){
         productService.updateProduct(product);
         return null;
+    }
+
+    @DeleteMapping("/{productId}")
+    public void deleteProduct(@PathVariable Long productId){
+        productService.deleteProduct(productId);
     }
 }

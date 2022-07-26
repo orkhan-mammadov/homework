@@ -12,7 +12,9 @@ public interface ProductService {
 
     void createSample();
 
-    void addProduct(MultipartFile file, String productName, Double cost);
+    void addProduct(Product product);
 
     void updateProduct(Product product);
+
+    void deleteProduct(Long productId);
 }
