@@ -3,16 +3,10 @@ package com.orkhan.shopapp.service;
 import com.orkhan.shopapp.DTO.ProductListDTO;
 import com.orkhan.shopapp.dao.ProductRepo;
 import com.orkhan.shopapp.entity.Product;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -32,21 +26,13 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Object getById(Long productId) {
+    public Optional<Product> getById(Long productId) {
         return productRepo.findById(productId);
     }
 
-    @Override
-    public Product createSample() {
-        Product sample = new Product();
-        sample.setCost(2.5);
-        sample.setProductName("first");
-        sample.setDetails("Details of product");
-        return productRepo.save(sample);
-    }
 
     @Override
-    public void addProduct(Product product) {
+    public Product addProduct(Product product) {
 //        String fileName = StringUtils.cleanPath(System.currentTimeMillis()+"pp.png");
 //        try {
 //            Path fileStorage = Paths.get(fileUrl, fileName).toAbsolutePath().normalize();
@@ -56,16 +42,17 @@ public class ProductServiceImpl implements ProductService{
 //            e.printStackTrace();
 //
 
-        productRepo.save(product);
+        return productRepo.save(product);
     }
 
     @Override
-    public void updateProduct(Product product) {
-        productRepo.save(product);
+    public Product updateProduct(Product product) {
+        return productRepo.save(product);
     }
 
     @Override
-    public void deleteProduct(Long productId){
+    public Boolean deleteProduct(Long productId){
         productRepo.deleteById(productId);
+        return true;
     }
 }

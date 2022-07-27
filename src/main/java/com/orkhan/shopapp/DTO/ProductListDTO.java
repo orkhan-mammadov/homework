@@ -2,11 +2,13 @@ package com.orkhan.shopapp.DTO;
 
 import com.orkhan.shopapp.entity.Product;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 public class ProductListDTO {
     private List<Product> products;

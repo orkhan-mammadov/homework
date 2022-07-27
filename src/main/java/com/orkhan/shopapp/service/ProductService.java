@@ -2,19 +2,18 @@ package com.orkhan.shopapp.service;
 
 import com.orkhan.shopapp.DTO.ProductListDTO;
 import com.orkhan.shopapp.entity.Product;
-import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Optional;
 
 public interface ProductService {
 
     ProductListDTO getAll();
 
-    Object getById(Long productId);
+    Optional<Product> getById(Long productId);
 
-    Product createSample();
+    Product addProduct(Product product);
 
-    void addProduct(Product product);
+    Product updateProduct(Product product);
 
-    void updateProduct(Product product);
-
-    void deleteProduct(Long productId);
+    Boolean deleteProduct(Long productId);
 }

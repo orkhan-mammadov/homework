@@ -3,10 +3,8 @@ package com.orkhan.shopapp.controller;
 import com.orkhan.shopapp.DTO.ProductListDTO;
 import com.orkhan.shopapp.entity.Product;
 import com.orkhan.shopapp.service.ProductService;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -20,33 +18,31 @@ public class ProductController {
     }
 
     @GetMapping("")
+    @ResponseStatus(code = HttpStatus.OK)
     public ProductListDTO getAll(){
         return productService.getAll();
     }
 
     @GetMapping("/{productId}")
+    @ResponseStatus(code = HttpStatus.OK)
     public Object getProduct(@PathVariable Long productId){
         return productService.getById(productId);
     }
 
     @PostMapping()
+    @ResponseStatus(code = HttpStatus.OK)
     public Object addProduct(@RequestBody Product product){
-        productService.addProduct(product);
-        return null;
-    }
-
-    @GetMapping("/createSample")
-    public Object createSample(){
-        return productService.createSample();
+        return productService.addProduct(product);
     }
 
     @PutMapping()
+    @ResponseStatus(code = HttpStatus.OK)
     public Object updateProduct(@RequestBody Product product){
-        productService.updateProduct(product);
-        return null;
+        return productService.updateProduct(product);
     }
 
     @DeleteMapping("/{productId}")
+    @ResponseStatus(code = HttpStatus.OK)
     public void deleteProduct(@PathVariable Long productId){
         productService.deleteProduct(productId);
     }
