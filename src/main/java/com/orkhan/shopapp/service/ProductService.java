@@ -10,7 +10,7 @@ public interface ProductService {
 
     Object getById(Long productId);
 
-    void createSample();
+    Product createSample();
 
     void addProduct(Product product);
 

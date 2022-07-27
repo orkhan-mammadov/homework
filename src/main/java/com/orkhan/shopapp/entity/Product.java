@@ -1,12 +1,16 @@
 package com.orkhan.shopapp.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "product")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
 
     @Id
@@ -16,8 +20,6 @@ public class Product {
     private String productName;
 
     private Double cost;
-
-    private String img;
 
     private String details;
 }

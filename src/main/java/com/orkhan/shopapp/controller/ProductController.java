@@ -37,8 +37,7 @@ public class ProductController {
 
     @GetMapping("/createSample")
     public Object createSample(){
-        productService.createSample();
-        return null;
+        return productService.createSample();
     }
 
     @PutMapping()

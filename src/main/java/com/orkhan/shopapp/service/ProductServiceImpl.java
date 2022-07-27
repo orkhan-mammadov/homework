@@ -37,13 +37,12 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public void createSample() {
+    public Product createSample() {
         Product sample = new Product();
         sample.setCost(2.5);
         sample.setProductName("first");
-        sample.setImg(null);
         sample.setDetails("Details of product");
-        productRepo.save(sample);
+        return productRepo.save(sample);
     }
 
     @Override
